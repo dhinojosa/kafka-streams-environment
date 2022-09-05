@@ -177,6 +177,14 @@ services:
         volumes:
             - mongodb_data_container:/data/db
 
+    redis:
+        image: redis:6.2-alpine
+        ports:
+            - '6379:6379'
+        command: redis-server --save 20 1 --loglevel warning --requirepass redis
+        volumes:
+            - redis_container:/data
+
     my-producer:
         image: dhinojosa/my-producer
         depends_on:
@@ -185,6 +193,8 @@ services:
         container_name: my-producer
         environment:
             BOOTSTRAP_SERVERS: "broker:29092"
+
+
 
     my-consumer-1:
         image: dhinojosa/my-consumer
@@ -229,4 +239,6 @@ volumes:
     mongodb_data_container:
         driver: local
     postgresdb_data_container:
+        driver: local
+    redis_data_container:
         driver: local
