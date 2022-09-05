@@ -54,7 +54,7 @@ services:
             SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
 
     connect:
-        image: dhinojosa/postgres-connector:7.2.1
+        image: dhinojosa/redis-mongo-postgres-connector:7.2.1
         hostname: connect
         container_name: connect
         depends_on:
