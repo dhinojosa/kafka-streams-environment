@@ -167,7 +167,7 @@ services:
         volumes:
             - postgresdb_data_container:/var/lib/postgresql/data
 
-    mongodb_container:
+    mongo:
         image: mongo:latest
         environment:
             - MONGO_INITDB_ROOT_USERNAME=mongo
