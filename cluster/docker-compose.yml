@@ -194,8 +194,6 @@ services:
         environment:
             BOOTSTRAP_SERVERS: "broker:29092"
 
-
-
     my-consumer-1:
         image: dhinojosa/my-consumer
         depends_on:
