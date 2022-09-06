@@ -30,12 +30,38 @@ public class MyStreams {
 
         List<String> northWestStates = List.of("WA", "OR", "ID");
         List<String> westernStates = List.of("CA", "NV", "AZ");
-        
+
         // One branch
         stream.filter((key, value) -> northWestStates.contains(key))
                 .peek((key, value) -> System.out.printf("Placing key: %s, value: %d in northwest-orders.\n", key,
                         value))
                 .to("northwest-orders");
+
+        //Two branches 
+        stream.filter((key, value) -> westernStates.contains(key))
+               .peek((key, value) ->
+                 System.out.printf("Placing key: %s, value: %d in western-orders.\n", key, value))
+               .to("western-orders");
+
+   
+        //Third branch
+        stream.groupByKey()
+              .reduce((total, next) -> total + next) 
+              .toStream()
+              .peek((key, value) ->
+                  System.out.printf("Placing key: %s, value %d in total-revenue-by-state\n", key, value))
+              .to("total-revenue-by-state",
+                  Produced.with(Serdes.String(), Serdes.Integer()));
+
+        //Fourth branch
+        stream.groupByKey()
+            .count()
+            .toStream()
+            .peek((key, value) ->
+                System.out.printf("Placing key: %s, value %d in total-orders-by-state\n", key, value))
+            .to("number-orders-by-state",
+                Produced.with(Serdes.String(), Serdes.Long()));         
+
 
         Topology topology = builder.build();
 
