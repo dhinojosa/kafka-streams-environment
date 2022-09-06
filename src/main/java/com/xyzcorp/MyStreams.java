@@ -28,8 +28,14 @@ public class MyStreams {
 
         KStream<String, Integer> stream = builder.stream("my-orders"); // Key: State, Value: Amount
 
-        //You work in this space
-
+        List<String> northWestStates = List.of("WA", "OR", "ID");
+        List<String> westernStates = List.of("CA", "NV", "AZ");
+        
+        // One branch
+        stream.filter((key, value) -> northWestStates.contains(key))
+                .peek((key, value) -> System.out.printf("Placing key: %s, value: %d in northwest-orders.\n", key,
+                        value))
+                .to("northwest-orders");
 
         Topology topology = builder.build();
 
