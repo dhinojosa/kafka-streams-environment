@@ -3,6 +3,7 @@ package com.xyzcorp;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -15,6 +16,7 @@ import org.apache.kafka.streams.kstream.Produced;
 public class MyStreams {
     public static void main(String[] args) {
         Properties props = new Properties();
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put(StreamsConfig.APPLICATION_ID_CONFIG,
                 "my-orders-stream");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,
