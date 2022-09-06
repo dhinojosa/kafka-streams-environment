@@ -1,5 +1,5 @@
 ---
-version: '2'
+version: '3'
 services:
     zookeeper:
         image: confluentinc/cp-zookeeper:7.2.1
@@ -183,7 +183,7 @@ services:
             - '6379:6379'
         command: redis-server --save 20 1 --loglevel warning --requirepass redis
         volumes:
-            - redis_container:/data
+            - redis_data_container:/data
 
     my-producer:
         image: dhinojosa/my-producer
