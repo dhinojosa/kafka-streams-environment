@@ -238,18 +238,25 @@ services:
             GROUP_ID: "my-group"
     
     my-streams-1:
-        image: dhinojosa/my-streams:1.0
+        image: dhinojosa/mystreams:1.0
         depends_on:
             - broker
         hostname: my-streams-1
         container_name: my-streams-1
 
     my-streams-2:
-        image: dhinojosa/my-streams:1.0
+        image: dhinojosa/mystreams:1.0
         depends_on:
             - broker
         hostname: my-streams-2
         container_name: my-streams-2  
+
+    my-streams-3:
+        image: dhinojosa/mystreams:1.0
+        depends_on:
+            - broker
+        hostname: my-streams-3
+        container_name: my-streams-3      
 volumes:
     mongodb_data_container:
         driver: local

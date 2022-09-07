@@ -207,10 +207,6 @@
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/avro/
                             </sourceDirectory>
-                            <!--uncomment for eclipse only -->
-                            <!--outputDirectory>
-                                ${project.basedir}/src/main/java
-                            </outputDirectory-->
                         </configuration>
                     </execution>
                 </executions>
